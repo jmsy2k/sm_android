@@ -1,4 +1,7 @@
 # sm_android
+
+# 요구사항 정리 필요
+
 매장 관리용
 
 게임 클라이언트: http request post 로 query 로 전달
@@ -9,6 +12,7 @@ C : client(dll)
 SS : SocketServer
 WS : WebServer
 MG : ManagerClient(mobile app)
+
 
 
 ## 서버 
@@ -25,24 +29,30 @@ MG : ManagerClient(mobile app)
     - user_id(Uniqueue) : String
     - password : String
     - type : manager, supermanager
+    - created_at
+    - modified_at
 
     store : 매장 정보
     - id(unique) : Int
     - managerId(manager.userId) : Int
     - name
+    - created_at
+    - modified_at
             
     device : 기기 정보
     - id(primary_key, autoincreament)
     - store_id(foregin)
     - mac_addr
+    - name
+    - created_at
+    - modified_at
 
     inout_tody : 입출금 표시(일 정산 이후에 삭제?)
     - store_id(constraint uniqueu)
     - device_id(constraint uniqueu)
     - is_input: bool
     - price : Int
-    - date : DATETIME
-    
+    - created_at : DATETIME
     
 ## client(dll)
 
