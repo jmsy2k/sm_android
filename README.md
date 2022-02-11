@@ -24,7 +24,7 @@ MG : ManagerClient(mobile app)
 
   table -> 
     
-    user : 관리자 
+    manager : 관리자 
     - id(primary_key, autoincreament) : Int
     - user_id(Uniqueue) : String
     - password : String
@@ -42,8 +42,8 @@ MG : ManagerClient(mobile app)
     device : 기기 정보
     - id(primary_key, autoincreament)
     - store_id(foregin)
-    - mac_addr
-    - name
+    - mac_addr(constraint) : 맥주소
+    - name(constraint) : 기기 번호
     - created_at
     - modified_at
 
@@ -53,6 +53,21 @@ MG : ManagerClient(mobile app)
     - is_input: bool
     - price : Int
     - created_at : DATETIME
+   
+    engineer : 설치 기사
+    - id : (primary_key, autoincrement)
+    - name : 
+    
+    game : 게임 정보 테이블
+    - id : (primary_key, autoincrement)
+    - name : 게임명(findwindow로 찾을수 있는?)
+    - 
+    
+    game_event : 게임 이벤트 테이블 // 게임마다 정해지는거지 설정에 따라 바뀔수 없음
+    - id : (primary_key, autoincrement)
+    - game_id(foregin)
+    - event_name : string
+    - vk : Int // 가상키코드
     
 ## client(dll)
 
