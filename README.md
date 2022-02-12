@@ -8,11 +8,17 @@
 
 ## 약어
 
-C : client(dll)
-SS : SocketServer
-WS : WebServer
-MG : ManagerClient(mobile app)
+A : 앱
 
+S : 소켓서버
+
+H : 매장 호스트
+
+C : 매장 클라이언트
+
+I : 설치 usb 프로그램
+
+W : 웹서버
 
 
 ## 서버 
