@@ -44,16 +44,21 @@ W : 웹서버
     - name_ko : string (관리자, 총괄, 기사, 어드민)
     - name : manager, supermanager, engineer, admin
     
-    permission : 매장 권한(매핑 테이블)
+    store_permission : 매장 권한(매핑 테이블)
     - id( primary_key, autoincrement) : Int
     - manager_id(foregin, index) : Int
     - store_id(foregin) : Int
     
+    game_permission : 게임 권한(매핑 테이블)
+    - id( primary_key, autoincrement) : Int
+    - manager_id(foregin, index) : Int
+    - game_id(foregin) : Int
+    
     store : 매장 정보
     - id(unique) : Int
-    - managerId(manager.userId) : Int
-    - name
+    - name : string
     - manager_id(foregin) : Int ( 등록한 기사 정보 )
+    - host_local_ip : string
     - created_at
     - modified_at
             
@@ -105,6 +110,64 @@ W : 웹서버
 
 - 입출금 전송(매장, 기기번호, 입출금 여부, 금액)
 - 핑(켜져 있는지 확인을 위함) 1분에 한번씩 전송: 매장, 기기번호
+
+
+## 필요 프로그램 목록
+
+1. client(dll)
+  - 입출금 금액 전송(웹)
+2. call client(exe)  
+  - 매장 호스트 조회(웹)
+  - 매장 호스트 접속(소켓)
+  - 콜 입력(소켓)
+  - 접속 끊기면 게속 재시도
+3. store host(exe or service) //
+  - 로컬 소켓 서버(기기 관리)
+  - 서버 접속(소켓)
+  - 기기 목록 관리(소켓)
+  - 콜 전달(소켓)
+  - 접속 끊키면 계속 재시도
+4. socket server(exe)
+  - 매장 접속되어 있는 매장 목록 관리
+  - 콜 전달
+  - 매장 기기 목록 전달
+5. web server(node js)
+  - 사용자 인증
+  - 호스트 인스톨
+  - 게임 목록 관리
+  - 기기 설치 관리
+  - 호스 로컬 ip 관리
+  - 매장 목록 관리(매장 등록을 어디서 할건지?)
+  - 기기 목록 관리
+  - 게임 목록 관리
+  - 게임 이벤트 관리
+  - 콜 히스토리 관리
+  - 사용자 추가
+  - 사용자 타입 관리
+6. db(mysql)
+7. app(android)
+  - 인증 
+  - 매장 목록 
+  - 매장 정보(이름, 정산(날짜별?), 기기 목록)
+  - 기기 정보(번호, 맥주소, 입출금 기록, 입출금 토탈, 이번트 콜)
+  - 매장 생성 
+  - 게임 생성
+  - 이벤트 추가/수정/삭제
+  - 사용자 생성 <- 본인 가입이 아니고 하위 관리자만 생성 가능(기사는 생성 불가)
+  - 기사에게 (매장/게임)권한 부여 창
+8. installer(exe) // 별개 프로그램 제작
+  - 인증(id/비번 저장)
+  - call host 설치
+  - call host localip 전송
+  - call client 설치
+  - 확률/금액(레지스트리 등록)
+  - 매장 목록 조회
+  - 게임 목록 조회
+ 
+## 필요 서버
+1. ec2 windows server(socket server)
+2. ec2 linux  server(web server)
+3. rds mysql 
 
 ## manager client(mobile app)  
 
