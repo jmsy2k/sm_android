@@ -86,7 +86,12 @@ MG : ManagerClient(mobile app)
     - event_id(foregin)
     
     setting_log : 세팅 로그
-    - 
+    - id(primary_key, autoinrement)
+    - manager_id(foregin)
+    - store_id(foregin)
+    - device_id(foregin)
+    - type: host, device
+    - created_at: DATETIME
     
 ## client(dll)
 
