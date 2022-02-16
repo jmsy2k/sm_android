@@ -19,11 +19,12 @@ W : 웹서버
 
 
 ## 서버 
-### node web server : db 관리 
 
-### db : mysql -> orm 사용 Sequelize
+### 패킷
 
-  table -> 
+https://docs.google.com/spreadsheets/d/1zxJGZiLXYNsahyMkz1Ka81bGi7yCZpOOnwxietSNJ0k/edit?usp=sharing
+
+### table
     
     manager : 관리자 
     - id(primary_key, autoincreament) : Int
@@ -162,9 +163,6 @@ W : 웹서버
     - 매장 목록 조회
     - 게임 목록 조회
  
-## 패킷
-
-https://docs.google.com/spreadsheets/d/1zxJGZiLXYNsahyMkz1Ka81bGi7yCZpOOnwxietSNJ0k/edit?usp=sharing
 
 ## 필요 서버
 1. ec2 windows server(socket server)
