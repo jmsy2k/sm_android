@@ -21,8 +21,6 @@ W : 웹서버
 ## 서버 
 ### node web server : db 관리 
 
-### socketio : ping 관리
-
 ### db : mysql -> orm 사용 Sequelize
 
   table -> 
