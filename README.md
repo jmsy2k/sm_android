@@ -1,10 +1,5 @@
 # sm_android
 
-# 요구사항 정리 필요
-
-매장 관리용
-
-게임 클라이언트: http request post 로 query 로 전달
 
 ## 약어
 
@@ -169,25 +164,15 @@ W : 웹서버
     - 매장 목록 조회
     - 게임 목록 조회
  
+## 패킷
+
+https://docs.google.com/spreadsheets/d/1zxJGZiLXYNsahyMkz1Ka81bGi7yCZpOOnwxietSNJ0k/edit?usp=sharing
+
 ## 필요 서버
 1. ec2 windows server(socket server)
 2. ec2 linux  server(web server)
 3. rds mysql 
 
-## manager client(mobile app)  
-
-### 화면 
-
-#### 로그인 (id, password)
-
-#### 매장 목록
-  - 매상 표시
-#### 기기 목록
-  - 기기 목록 표시
-  - 기기 온오프 여부 표시
-  - 입출금 표시
-
-#### 입출금 기록
 
 
 
