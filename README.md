@@ -31,7 +31,7 @@ https://docs.google.com/spreadsheets/d/1zxJGZiLXYNsahyMkz1Ka81bGi7yCZpOOnwxietSN
     - user_id(Uniqueue) : String
     - user_name : String
     - password : String
-    - manager_type_id(foregin) : Int
+    - manager_type_id(foreign) : Int
     - created_at
     - modified_at
 
@@ -42,28 +42,28 @@ https://docs.google.com/spreadsheets/d/1zxJGZiLXYNsahyMkz1Ka81bGi7yCZpOOnwxietSN
     
     store_permission : 매장 권한(매핑 테이블)
     - id( primary_key, autoincrement) : Int
-    - manager_id(foregin, index) : Int
-    - store_id(foregin) : Int
+    - manager_id(foreign, index) : Int
+    - store_id(foreign) : Int
     
     game_permission : 게임 권한(매핑 테이블)
     - id( primary_key, autoincrement) : Int
-    - manager_id(foregin, index) : Int
-    - game_id(foregin) : Int
+    - manager_id(foreign, index) : Int
+    - game_id(foreign) : Int
     
     store : 매장 정보
     - id(unique) : Int
     - name : string
-    - manager_id(foregin) : Int ( 등록한 기사 정보 )
+    - manager_id(foreign) : Int ( 등록한 기사 정보 )
     - host_local_ip : string
     - created_at
     - modified_at
             
     device : 기기 정보
     - id(primary_key, autoincreament)
-    - store_id(foregin)
+    - store_id(foreign)
     - mac_addr(constraint) : 맥주소
     - name(constraint) : 기기 번호
-    - game_id(foregin)
+    - game_id(foreign)
     - created_at
     - modified_at
 
@@ -80,23 +80,23 @@ https://docs.google.com/spreadsheets/d/1zxJGZiLXYNsahyMkz1Ka81bGi7yCZpOOnwxietSN
     
     game_event : 게임 이벤트 테이블 // 게임마다 정해지는거지 설정에 따라 바뀔수 없음
     - id : (primary_key, autoincrement)
-    - game_id(foregin)
+    - game_id(foreign)
     - event_name : string
     - vk : Int // 가상키코드
     
     call_log : 콜 로그
     - id(primary_key, autoincrement)
-    - store_id(foregin)
-    - device_id(foregin)
+    - store_id(foreign)
+    - device_id(foreign)
     - created_at: DATETIME
-    - manager_id(foregin)
-    - event_id(foregin)
+    - manager_id(foreign)
+    - event_id(foreign)
     
     setting_log : 세팅 로그
     - id(primary_key, autoinrement)
-    - manager_id(foregin)
-    - store_id(foregin)
-    - device_id(foregin)
+    - manager_id(foreign)
+    - store_id(foreign)
+    - device_id(foreign)
     - type: host, device
     - created_at: DATETIME
     
