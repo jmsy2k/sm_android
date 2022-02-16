@@ -100,17 +100,9 @@ https://docs.google.com/spreadsheets/d/1zxJGZiLXYNsahyMkz1Ka81bGi7yCZpOOnwxietSN
     - type: host, device
     - created_at: DATETIME
     
-## client(dll)
-
-### 기능 
-
-- 입출금 전송(매장, 기기번호, 입출금 여부, 금액)
-- 핑(켜져 있는지 확인을 위함) 1분에 한번씩 전송: 매장, 기기번호
-
-
 ## 필요 프로그램 목록
 
-1. client(dll)
+1. client(dll) : 기존 게임 연동 필요
     - 입출금 금액 전송(웹)
     - 확률 전달(레지스트리)
     - 게임 금액 전달(레지스트리)
