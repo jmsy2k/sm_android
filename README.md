@@ -106,22 +106,22 @@ https://docs.google.com/spreadsheets/d/1zxJGZiLXYNsahyMkz1Ka81bGi7yCZpOOnwxietSN
     - 입출금 금액 전송(웹)
     - 확률 전달(레지스트리)
     - 게임 금액 전달(레지스트리)
-2. call client(exe)  
+2. * call client(exe)  
     - 매장 호스트 조회(웹)
     - 매장 호스트 접속(소켓)
     - 콜 입력(소켓)
     - 접속 끊기면 게속 재시도
-3. store host(exe or service) //
+3. * store host(exe or service) //
     - 로컬 소켓 서버(기기 관리)
     - 서버 접속(소켓)
     - 기기 목록 관리(소켓)
     - 콜 전달(소켓)
     - 접속 끊키면 계속 재시도
-4. socket server(exe)
+4. * socket server(exe)
     - 매장 접속되어 있는 매장 목록 관리
     - 콜 전달
     - 매장 기기 목록 전달
-5. web server(node js)
+5. * web server(node js)
     - 사용자 인증
     - 호스트 인스톨
     - 게임 목록 관리
@@ -134,7 +134,7 @@ https://docs.google.com/spreadsheets/d/1zxJGZiLXYNsahyMkz1Ka81bGi7yCZpOOnwxietSN
     - 콜 히스토리 관리
     - 사용자 추가
     - 사용자 타입 관리
-6. db(mysql)
+6. * db(mysql)
 7. app(android)
     - 인증 
     - 매장 목록 
@@ -145,7 +145,7 @@ https://docs.google.com/spreadsheets/d/1zxJGZiLXYNsahyMkz1Ka81bGi7yCZpOOnwxietSN
     - 이벤트 추가/수정/삭제
     - 사용자 생성 <- 본인 가입이 아니고 하위 관리자만 생성 가능(기사는 생성 불가)
     - 기사에게 (매장/게임)권한 부여 창
-8. installer(exe) // 별개 프로그램 제작
+8. * installer(exe) // 별개 프로그램 제작
     - 인증(id/비번 저장)
     - call host 설치
     - call host 설치 내용 전송(localip,매장 id)
