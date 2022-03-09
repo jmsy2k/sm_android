@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">ms</string>
+    <string name="playback_channel_name">Playback</string>
+    <string name="playback_channel_description">Playback Descritpion</string>
+
+
+    <string name="stop">정지</string>
+    <string name="pause">일시정지</string>
+    <string name="play">재생</string>
+    <string name="play_pause">Play and pause toggle</string>
+    <string name="previous">이전채널</string>
+    <string name="next">다음채널</string>
+
+
+    <!-- Broadcast Receivers -->
+    <string name="broadcast_seekbar_value">broadcast_seekbar_value</string>
+    <string name="broadcast_new_media_id">broadcast_new_media_id</string>
+    <string name="playlist">재생목록</string>
+    <string name="cancel">취소</string>
+    <string name="confirm">확인</string>
+    <string name="alert">알림</string>
+    <string name="search_hint">어떤 채널을 찾으시나요?</string>
+    <string name="no_search">검색결과가 없습니다.</string>
+    <string name="no_recent_keyword">최근 검색어가 없습니다.</string>
+    <string name="recommend_channel">추천채널</string>
+    <string name="bookmarked_channel">찜한 채널</string>
+    <string name="liked">좋아요한</string>
+    <string name="add_store">매장 추가</string>
+    <string name="add_game">게임 추가</string>
+
+</resources>
