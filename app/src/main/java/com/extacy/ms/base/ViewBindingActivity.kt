@@ -9,8 +9,8 @@ import java.lang.reflect.ParameterizedType
 open class ViewBindingActivity<BINDING: ViewBinding>: BaseActivity() {
     private var _binding: ViewBinding? = null
     @Suppress("UNCHECKED_CAST")
-    protected val binding: BINDING
-        get() = _binding as BINDING
+    protected val binding: BINDING?
+        get() = _binding as? BINDING
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -10,8 +10,8 @@ import java.lang.reflect.ParameterizedType
 open class ViewBindingFragment<BINDING: ViewBinding>: BaseFragment() {
     private var _binding: ViewBinding? = null
     @Suppress("UNCHECKED_CAST")
-    protected val binding: BINDING
-        get() = _binding as BINDING
+    protected val binding: BINDING?
+        get() = _binding as? BINDING
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         createBindingInstance(inflater, container).also { _binding = it }.root
 

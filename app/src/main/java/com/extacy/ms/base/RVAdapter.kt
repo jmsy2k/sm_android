@@ -17,7 +17,7 @@ abstract class RVAdapter<BINDING: ViewBinding> : RecyclerView.Adapter<RVAdapter.
     }
 
     override fun onBindViewHolder(holder: ViewHolder<BINDING>, position: Int) {
-        bind(holder.binding!!, position)
+        bind(holder.binding, position)
     }
 
     override fun getItemCount(): Int {
@@ -33,5 +33,5 @@ abstract class RVAdapter<BINDING: ViewBinding> : RecyclerView.Adapter<RVAdapter.
     }
 
     abstract fun count(): Int
-    abstract fun bind(cell: BINDING, pos: Int)
+    abstract fun bind(cell: BINDING?, pos: Int)
 }

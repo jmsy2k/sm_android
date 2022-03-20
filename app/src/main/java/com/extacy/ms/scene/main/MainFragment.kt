@@ -5,18 +5,21 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.widget.EditText
+import android.widget.Spinner
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.extacy.ms.R
 import com.extacy.ms.base.RVAdapter
 import com.extacy.ms.base.ViewBindingFragment
+import com.extacy.ms.common.Common
 import com.extacy.ms.databinding.CellStoreListBinding
+import com.extacy.ms.databinding.DialogAddManagerBinding
+import com.extacy.ms.databinding.DialogCombineBinding
 import com.extacy.ms.databinding.FragmentMainBinding
-import com.extacy.ms.net.ms.api.APIAddStore
-import com.extacy.ms.net.ms.api.APIStoreList
-import com.extacy.ms.net.ms.api.StoreList
+import com.extacy.ms.net.ms.api.*
 import com.extacy.ms.scene.game.GameInfoFragment
 import com.extacy.ms.scene.game.GameListFragment
+import com.extacy.ms.scene.manager.ManagerListFragment
 
 
 // 네비게이션
@@ -45,86 +48,99 @@ class MainFragment: ViewBindingFragment<FragmentMainBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonAddStore.setOnClickListener {
-            val view = layoutInflater.inflate(R.layout.dialog_editable, null)
-            val editText = view.findViewById(R.id.edit) as EditText
-            var builder = AlertDialog.Builder(requireContext())
-                .setTitle(getString(R.string.add_store))
-                .setView(view)
-                .setPositiveButton(getString(R.string.confirm)) { dialogInterface, i ->
-                    if (editText.text.isEmpty()) {
-                        showAlert("이름을 입력해주세요.")
-                        return@setPositiveButton
+        binding?.run {
+            buttonAddStore.setOnClickListener {
+                val view = layoutInflater.inflate(R.layout.dialog_editable, null)
+                val editText = view.findViewById(R.id.edit) as EditText
+                var builder = AlertDialog.Builder(requireContext())
+                    .setTitle(getString(R.string.add_store))
+                    .setView(view)
+                    .setPositiveButton(getString(R.string.confirm)) { dialogInterface, i ->
+                        if (editText.text.isEmpty()) {
+                            showAlert("이름을 입력해주세요.")
+                            return@setPositiveButton
+                        }
+
+                        val storeName = editText.text.toString()
+                        APIAddStore.request(requestable, storeName) { res ->
+                            if (res.isSuccess()) {
+                                showAlert("추가 되었습니다.", confirmCallback = {
+                                    binding?.editSearchStore?.setText(storeName)
+                                    requestStoreList(storeName)
+
+                                    dialogInterface.dismiss()
+                                })
+                            } else {
+                                showAlert("${res.code}\n${res.msg}")
+                            }
+                        }
                     }
+                    .setNegativeButton(getString(R.string.cancel)) { dialogInterface, i ->
+                        dialogInterface.dismiss()
+                    }
+                builder.create().show()
+            }
 
-                    val storeName = editText.text.toString()
-                    APIAddStore.request(requestable, storeName) { res ->
-                        if (res.isSuccess()) {
-                            showAlert("추가 되었습니다.", confirmCallback = {
-                                binding.editSearchStore.setText(storeName)
-                                requestStoreList(storeName)
+            buttonGameList.setOnClickListener {
+                val fragment = GameListFragment()
+                pushFragment(fragment)
+            }
 
-                                dialogInterface.dismiss()
-                            })
-                        } else {
-                            showAlert("${res.code}\n${res.msg}")
+            buttonManagerList.setOnClickListener {
+                val fragment = ManagerListFragment()
+                pushFragment(fragment)
+            }
+
+            buttonSearch.setOnClickListener {
+                requestStoreList(binding?.editSearchStore?.text.toString(), true)
+            }
+
+            editSearchStore.setOnKeyListener { _, keyCode, event ->
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
+                    requestStoreList(binding?.editSearchStore?.text.toString(), true)
+                    return@setOnKeyListener true
+                }
+                false
+            }
+
+
+            recyclerStoreList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            recyclerStoreList.adapter = object: RVAdapter<CellStoreListBinding>() {
+                override fun count(): Int {
+                    return storeList.stores.size
+                }
+
+                override fun bind(cell: CellStoreListBinding?, pos: Int) {
+                    cell?.run {
+                        textStoreName.text = storeList.stores[pos].name
+                        root.setOnClickListener {
+                            Common.selectedStore = storeList.stores[pos]
+                            val fragment = StoreInfoFragment()
+                            pushFragment(fragment)
+                        }
+
+                        if(pos == storeList.stores.size - 1 && storeList.has_next) {
+                            requestStoreList(storeList.keyword)
                         }
                     }
                 }
-                .setNegativeButton(getString(R.string.cancel)) { dialogInterface, i ->
-                    dialogInterface.dismiss()
-                }
-            builder.create().show()
-
-        }
-
-        binding.buttonGameList.setOnClickListener {
-            val fragment = GameListFragment()
-            pushFragment(fragment)
-        }
-
-        binding.buttonAddManager.setOnClickListener {
-
-
-        }
-
-        binding.buttonSearch.setOnClickListener {
-            requestStoreList(binding.editSearchStore.text.toString(), true)
-        }
-
-        binding.editSearchStore.setOnKeyListener { _, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
-                requestStoreList(binding.editSearchStore.text.toString(), true)
-                return@setOnKeyListener true
-            }
-            false
-        }
-
-
-        binding.recyclerStoreList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.recyclerStoreList.adapter = object: RVAdapter<CellStoreListBinding>() {
-            override fun count(): Int {
-                return storeList.stores.size
-            }
-
-            override fun bind(cell: CellStoreListBinding, pos: Int) {
-                with(cell) {
-                    textStoreName.text = storeList.stores[pos].name
-                    root.setOnClickListener {
-                        val fragment = StoreInfoFragment()
-                        val arg = Bundle()
-                        arg.putInt("id", storeList.stores[pos].id)
-                        fragment.arguments = arg
-                        pushFragment(fragment)
-                    }
-
-                    if(pos == storeList.stores.size - 1 && storeList.has_next) {
-                        requestStoreList(storeList.keyword)
-                    }
-                }
             }
         }
-        requestStoreList()
+
+        requestUserInfo()
+    }
+
+    fun requestUserInfo() {
+        APIUserInfo.request(requestable) { res ->
+            if( res.isSuccess() ) {
+                Common.userInfo = res.body!!
+
+
+                requestStoreList()
+            } else {
+                showAlert("${res.code}\n${res.msg}")
+            }
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -133,6 +149,7 @@ class MainFragment: ViewBindingFragment<FragmentMainBinding>() {
             return
         }
 
+        isLoading = true
         val page = if( force || keyword != storeList.keyword ) 1 else storeList.page + 1
         APIStoreList.request(requestable, page, keyword) { res ->
             if (res.isSuccess()) {
@@ -145,7 +162,7 @@ class MainFragment: ViewBindingFragment<FragmentMainBinding>() {
                         storeList.page = body.page
                         storeList.has_next = body.has_next
                     }
-                    binding.recyclerStoreList.adapter?.notifyDataSetChanged()
+                    binding?.recyclerStoreList?.adapter?.notifyDataSetChanged()
                 } else {
                     showToast("통신 실패")
                 }

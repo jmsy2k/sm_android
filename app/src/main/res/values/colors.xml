@@ -24,5 +24,7 @@
     <color name="miniplayer_bg">#d9212121</color>
     <color name="gray_42">#ff424242</color>
     <color name="gray_61">#ff616161</color>
+    <color name="light_blue">#ff4444ff</color>
+    <color name="light_red">#ffff4444</color>
 
 </resources>

@@ -2,6 +2,11 @@ package com.extacy.ms.common
 
 import android.content.Context
 import com.extacy.ms.net.UrlSelector
+import com.extacy.ms.net.ms.api.DeviceItem
+import com.extacy.ms.net.ms.api.ManagerType
+import com.extacy.ms.net.ms.api.StoreItem
+import com.extacy.ms.net.ms.api.UserInfo
+import java.text.SimpleDateFormat
 
 class Common {
     companion object {
@@ -20,9 +25,18 @@ class Common {
             versionName = appContext.packageManager.getPackageInfo(appContext.packageName, 0).versionName
         }
 
+        var userInfo = UserInfo()
 
+
+        var selectedStore: StoreItem? = null
+        var selectedDevice: DeviceItem? = null
+        var selectedDeviceOnline = false
     }
 }
+
+var dateFormatFull = SimpleDateFormat("yyyy.MM.dd HH:mm")
+var dateFormatDate = SimpleDateFormat("yyyy.MM.dd")
+var dateFormatTime = SimpleDateFormat("HH:mm")
 
 
 const val PLAYLIST_ID = "PLAYLIST_ID"

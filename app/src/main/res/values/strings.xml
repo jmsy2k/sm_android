@@ -12,7 +12,6 @@
     <string name="next">다음채널</string>
 
 
-    <!-- Broadcast Receivers -->
     <string name="broadcast_seekbar_value">broadcast_seekbar_value</string>
     <string name="broadcast_new_media_id">broadcast_new_media_id</string>
     <string name="playlist">재생목록</string>

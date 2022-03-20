@@ -29,11 +29,11 @@
             android:text="게임목록"
             />
         <Button
-            android:id="@+id/buttonAddManager"
+            android:id="@+id/buttonManagerList"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="관리자추가"
+            android:text="계정목록"
             />
     </LinearLayout>
 

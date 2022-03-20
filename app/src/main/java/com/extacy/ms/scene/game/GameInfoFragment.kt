@@ -31,36 +31,39 @@ class GameInfoFragment: ViewBindingFragment<FragmentGameInfoBinding>() {
             gameName = arg.getString("name").toString()
         }
 
-        binding.buttonAddEvent.setOnClickListener {
-            showEditDialog()
-        }
-        binding.textGameName.text = gameName
-
-        binding.recyclerEvents.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.recyclerEvents.adapter = object: RVAdapter<CellGameEventBinding>() {
-            override fun count(): Int {
-                return gameInfo.events.size
+        binding?.run {
+            buttonAddEvent.setOnClickListener {
+                showEditDialog()
             }
+            textGameName.text = gameName
 
-            override fun bind(cell: CellGameEventBinding, pos: Int) {
-                with(cell) {
-                    val event = gameInfo.events[pos]
-                    textEventName.text = event.name
-                    textVk.text = VirtualKey.fromInt(event.vk).name
-                    buttonEdit.setOnClickListener {
-                        showEditDialog(event)
-                    }
+            recyclerEvents.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            recyclerEvents.adapter = object: RVAdapter<CellGameEventBinding>() {
+                override fun count(): Int {
+                    return gameInfo.events.size
+                }
 
-                    buttonDelete.setOnClickListener {
-                        APIDeleteEvent.request(requestable, event.id) { res ->
-                            if( res.isSuccess() ) {
-                                requestGameInfo()
+                override fun bind(cell: CellGameEventBinding?, pos: Int) {
+                    cell?.run {
+                        val event = gameInfo.events[pos]
+                        textEventName.text = event.name
+                        textVk.text = VirtualKey.fromInt(event.vk).name
+                        buttonEdit.setOnClickListener {
+                            showEditDialog(event)
+                        }
+
+                        buttonDelete.setOnClickListener {
+                            APIDeleteEvent.request(requestable, event.id) { res ->
+                                if( res.isSuccess() ) {
+                                    requestGameInfo()
+                                }
                             }
                         }
                     }
                 }
             }
         }
+
         requestGameInfo()
     }
 
@@ -70,7 +73,7 @@ class GameInfoFragment: ViewBindingFragment<FragmentGameInfoBinding>() {
         APIGameInfo.request(requestable, gameId) { res ->
             if( res.isSuccess() ) {
                 gameInfo = res.body!!
-                binding.recyclerEvents.adapter?.notifyDataSetChanged()
+                binding?.recyclerEvents?.adapter?.notifyDataSetChanged()
             }
         }
     }

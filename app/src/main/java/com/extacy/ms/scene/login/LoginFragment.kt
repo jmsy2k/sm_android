@@ -13,11 +13,11 @@ class LoginFragment: ViewBindingFragment<FragmentLoginBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.editId.setText(Pref.lastLoginId)
+        binding?.editId?.setText(Pref.lastLoginId)
 
-        binding.buttonLogin.setOnClickListener {
-            val id = binding.editId.text.toString()
-            val pw = binding.editPw.text.toString()
+        binding?.buttonLogin?.setOnClickListener {
+            val id = binding?.editId?.text.toString()
+            val pw = binding?.editPw?.text.toString()
 
             if( id.isEmpty() ) {
                 showAlert("no id")
@@ -28,7 +28,7 @@ class LoginFragment: ViewBindingFragment<FragmentLoginBinding>() {
                 showAlert("no pw")
                 return@setOnClickListener
             }
-            Pref.lastLoginId = binding.editId.text.toString()
+            Pref.lastLoginId = binding?.editId?.text.toString()
             APILogin.request(requestable, id, pw) { res ->
                 if (res.isSuccess()) {
                     val body = res.body
